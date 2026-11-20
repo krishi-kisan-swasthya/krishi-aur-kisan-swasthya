@@ -26,7 +26,7 @@ const initTransporter = () => {
 initTransporter();
 
 export const emailService = {
-  // Send notification to admin (agrihealth@gmail.com) on new contact message
+  // Send notification to admin (agrihealth37@gmail.com) on new contact message
   sendContactNotificationToAdmin: async (contactData) => {
     const subject = `[नया संदेश] नया संपर्क अनुरोध: ${contactData.firstName} ${contactData.lastName || ''} (${contactData.interest})`;
     const html = `
@@ -78,7 +78,7 @@ export const emailService = {
     `;
 
     return emailService.sendMail({
-      to: appConfig.contact.email, // agrihealth@gmail.com
+      to: appConfig.contact.email, // agrihealth37@gmail.com
       subject,
       html,
       replyTo: contactData.email
@@ -125,7 +125,7 @@ export const emailService = {
     });
   },
 
-  // Send booking confirmation to admin (agrihealth@gmail.com)
+  // Send booking confirmation to admin (agrihealth37@gmail.com)
   sendBookingNotificationToAdmin: async (bookingData) => {
     const subject = `[नई बुकिंग] टोकन ${bookingData.token} - ${bookingData.serviceName} (${bookingData.name})`;
     const html = `
@@ -151,7 +151,7 @@ export const emailService = {
     `;
 
     return emailService.sendMail({
-      to: appConfig.contact.email, // agrihealth@gmail.com
+      to: appConfig.contact.email, // agrihealth37@gmail.com
       subject,
       html
     });

@@ -1,6 +1,6 @@
 // Official Contact Details for Krishi Aur Kishan
 export const contactInfo = {
-  email: "agrihealth@gmail.com",
+  email: "agrihealth37@gmail.com",
   phone: "+91 8252663421",
   rawPhone: "8252663421",
   whatsapp: "+91 8252663421",

@@ -95,7 +95,7 @@ git push -u origin main
 5. Under **Environment Variables**, add:
    - `NODE_ENV` = `production`
    - `CORS_ORIGIN` = `*`
-   - `ADMIN_EMAIL` = `agrihealth@gmail.com`
+   - `ADMIN_EMAIL` = `agrihealth37@gmail.com`
    - `CONTACT_PHONE` = `+91 8252663421`
    - `WHATSAPP_NUMBER` = `+91 8252663421`
    *(Optional for live Gmail alerts: `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASS`)*
@@ -145,5 +145,5 @@ Endpoints covered:
 ## 📞 Official Contacts
 - **Organization**: कृषि और किसान स्वास्थ्य (Agriculture & Farmers Health Hub)
 - **Location**: Vivekananda Global University, Sector 36, NRI Road, Jagatpura, Jaipur, Rajasthan 303012
-- **Email**: agrihealth@gmail.com
+- **Email**: agrihealth37@gmail.com
 - **Phone / WhatsApp**: +91 8252663421

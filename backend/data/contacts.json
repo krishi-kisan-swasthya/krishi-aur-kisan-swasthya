@@ -1,5 +1,17 @@
 [
   {
+    "id": "inq-1795184654421-8993",
+    "createdAt": "2026-11-20T14:24:14.421Z",
+    "status": "new",
+    "firstName": "सुरेश",
+    "lastName": "यादव",
+    "email": "suresh.farmer@gmail.com",
+    "phone": "9876543210",
+    "address": "ग्राम पिपली, सीकर, राजस्थान",
+    "interest": "Cattle Dairy",
+    "message": "देसी साहीवाल गाय के पोषण और दुग्ध वसा बढ़ाने हेतु सलाह चाहिए।"
+  },
+  {
     "id": "inq-1795182280111-2953",
     "createdAt": "2026-11-20T13:44:40.111Z",
     "status": "new",

@@ -10,9 +10,9 @@ export default function TopBar({ lang, setLang, t }) {
             <Phone size={15} />
             <span>+91 8252663421</span>
           </a>
-          <a href="mailto:agrihealth@gmail.com" className="top-item" title="Send Email">
+          <a href="mailto:agrihealth37@gmail.com" className="top-item" title="Send Email">
             <Mail size={15} />
-            <span>agrihealth@gmail.com</span>
+            <span>agrihealth37@gmail.com</span>
           </a>
           <span className="top-item hide-on-mobile">
             <MapPin size={15} />

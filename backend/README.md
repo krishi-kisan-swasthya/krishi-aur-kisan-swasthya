@@ -6,7 +6,7 @@ Backend microservice for **कृषि और किसान स्वास�
 
 ## 📞 Official Contact Configuration
 This backend is centrally configured with the official portal contact channels:
-- **Admin & Inquiry Email**: `agrihealth@gmail.com`
+- **Admin & Inquiry Email**: `agrihealth37@gmail.com`
 - **Helpline Phone**: `+91 8252663421`
 - **WhatsApp Support**: `+91 8252663421`
 - **Center Address**: `Vivekananda Global University, Sector 36, NRI Road, Jagatpura, Jaipur, Rajasthan 303012`
@@ -27,16 +27,16 @@ A `.env` file is pre-configured with default values:
 ```env
 PORT=5000
 NODE_ENV=development
-ADMIN_EMAIL=agrihealth@gmail.com
+ADMIN_EMAIL=agrihealth37@gmail.com
 CONTACT_PHONE=+91 8252663421
 WHATSAPP_NUMBER=+91 8252663421
 
 # Optional SMTP setup for live Gmail sending
 SMTP_HOST=smtp.gmail.com
 SMTP_PORT=587
-SMTP_USER=agrihealth@gmail.com
+SMTP_USER=agrihealth37@gmail.com
 SMTP_PASS=your_gmail_app_password
-SMTP_FROM=agrihealth@gmail.com
+SMTP_FROM=agrihealth37@gmail.com
 ```
 *(If SMTP credentials are not supplied, the email service operates in safe simulation mode, logging all email payloads and dispatches).*
 
@@ -64,14 +64,14 @@ node test-api.js
 ### 1. Contact & Inquiries
 - **`POST /api/contact`**
   - **Body**: `{ firstName, lastName, email, phone, address, interest, message }`
-  - **Action**: Validates input, saves to persistent storage, sends notification email to `agrihealth@gmail.com`, sends auto-response to farmer, generates WhatsApp direct chat link to `+91 8252663421`.
+  - **Action**: Validates input, saves to persistent storage, sends notification email to `agrihealth37@gmail.com`, sends auto-response to farmer, generates WhatsApp direct chat link to `+91 8252663421`.
 - **`GET /api/contact`**
   - Returns list of all received inquiries.
 
 ### 2. Consultation Appointments & Bookings
 - **`POST /api/bookings`**
   - **Body**: `{ name, phone, village, date, slot, mode, notes, serviceName, servicePrice }`
-  - **Action**: Generates unique appointment token (`#AKK-XXXX`), stores booking, triggers notification email to `agrihealth@gmail.com`, generates WhatsApp booking confirmation link.
+  - **Action**: Generates unique appointment token (`#AKK-XXXX`), stores booking, triggers notification email to `agrihealth37@gmail.com`, generates WhatsApp booking confirmation link.
 - **`GET /api/bookings`**
   - Returns all consultation bookings.
 - **`GET /api/bookings/:id`**

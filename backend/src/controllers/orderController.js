@@ -27,7 +27,7 @@ export const orderController = {
         notes: notes || ''
       });
 
-      // Send alert email to agrihealth@gmail.com
+      // Send alert email to agrihealth37@gmail.com
       emailService.sendMail({
         to: appConfig.contact.email,
         subject: `[नया ऑर्डर] ${orderRecord.orderNumber} - कुल राशि: ₹${totalAmount}`,

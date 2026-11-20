@@ -8,7 +8,7 @@ export const appConfig = {
   
   // Official Contact Info
   contact: {
-    email: process.env.ADMIN_EMAIL || 'agrihealth@gmail.com',
+    email: process.env.ADMIN_EMAIL || 'agrihealth37@gmail.com',
     phone: process.env.CONTACT_PHONE || '+91 8252663421',
     cleanPhone: '8252663421',
     whatsappNumber: process.env.WHATSAPP_NUMBER || '+91 8252663421',
@@ -27,6 +27,6 @@ export const appConfig = {
     secure: process.env.SMTP_SECURE === 'true',
     user: process.env.SMTP_USER || '',
     pass: process.env.SMTP_PASS || '',
-    fromEmail: process.env.SMTP_FROM || 'agrihealth@gmail.com'
+    fromEmail: process.env.SMTP_FROM || 'agrihealth37@gmail.com'
   }
 };

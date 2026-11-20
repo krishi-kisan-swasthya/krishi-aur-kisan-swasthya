@@ -86,7 +86,7 @@ export default function Navbar({ t, cartCount, onOpenCart, onOpenBookingModal })
         </ul>
         <div className="drawer-contact-info">
           <p><i className="fa-solid fa-phone"></i> +91 8252663421</p>
-          <p><i className="fa-solid fa-envelope"></i> agrihealth@gmail.com</p>
+          <p><i className="fa-solid fa-envelope"></i> agrihealth37@gmail.com</p>
           <p><i className="fa-solid fa-location-dot"></i> VGU, Jaipur, Rajasthan</p>
         </div>
       </div>

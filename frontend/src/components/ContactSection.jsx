@@ -114,7 +114,7 @@ export default function ContactSection({ t }) {
                   </div>
                   <div>
                     <strong>{t.conMailLabel}</strong>
-                    <p><a href="mailto:agrihealth@gmail.com">agrihealth@gmail.com</a></p>
+                    <p><a href="mailto:agrihealth37@gmail.com">agrihealth37@gmail.com</a></p>
                   </div>
                 </div>
 
@@ -276,7 +276,7 @@ export default function ContactSection({ t }) {
               {submitted && (
                 <div className="form-notice success" style={{ marginTop: '16px' }}>
                   <CheckCircle2 size={18} style={{ display: 'inline', marginRight: '6px', verticalAlign: 'text-bottom' }} />
-                  धन्यवाद! आपका संदेश सफलतापूर्वक Krishi Aur Kishan टीम (agrihealth@gmail.com / +91 8252663421) को प्राप्त हो गया है।
+                  धन्यवाद! आपका संदेश सफलतापूर्वक Krishi Aur Kishan टीम (agrihealth37@gmail.com / +91 8252663421) को प्राप्त हो गया है।
                   {whatsappLink && (
                     <div style={{ marginTop: '10px' }}>
                       <a

@@ -15,7 +15,7 @@ services:
       - key: CORS_ORIGIN
         value: "*"
       - key: ADMIN_EMAIL
-        value: agrihealth@gmail.com
+        value: agrihealth37@gmail.com
       - key: CONTACT_PHONE
         value: "+91 8252663421"
       - key: WHATSAPP_NUMBER

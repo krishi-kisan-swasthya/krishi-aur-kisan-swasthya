@@ -36,7 +36,7 @@ export const bookingController = {
         servicePrice: Number(servicePrice) || 50
       });
 
-      // Send email alert to official admin email (agrihealth@gmail.com)
+      // Send email alert to official admin email (agrihealth37@gmail.com)
       emailService.sendBookingNotificationToAdmin(bookingRecord).catch(err => {
         console.error('[BookingController] Admin alert error:', err);
       });

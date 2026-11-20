@@ -16,7 +16,7 @@ async function runTests() {
     assert.strictEqual(healthRes.status, 200);
     const healthData = await healthRes.json();
     assert.strictEqual(healthData.status, 'healthy');
-    assert.strictEqual(healthData.adminContact, 'agrihealth@gmail.com');
+    assert.strictEqual(healthData.adminContact, 'agrihealth37@gmail.com');
     assert.strictEqual(healthData.helplinePhone, '+91 8252663421');
     console.log('✅ Health check passed!\n');
 
@@ -25,7 +25,7 @@ async function runTests() {
     const infoRes = await fetch(`${BASE_URL}/api/info`);
     assert.strictEqual(infoRes.status, 200);
     const infoData = await infoRes.json();
-    assert.strictEqual(infoData.contact.email, 'agrihealth@gmail.com');
+    assert.strictEqual(infoData.contact.email, 'agrihealth37@gmail.com');
     assert.strictEqual(infoData.contact.phone, '+91 8252663421');
     console.log('✅ Info endpoint passed!\n');
 
@@ -59,7 +59,7 @@ async function runTests() {
     assert.strictEqual(validContactRes.status, 201);
     const validContactData = await validContactRes.json();
     assert.strictEqual(validContactData.success, true);
-    assert.strictEqual(validContactData.contactInfo.helplineEmail, 'agrihealth@gmail.com');
+    assert.strictEqual(validContactData.contactInfo.helplineEmail, 'agrihealth37@gmail.com');
     assert.strictEqual(validContactData.contactInfo.helplinePhone, '+91 8252663421');
     assert.ok(validContactData.whatsappDirectUrl.includes('8252663421'));
     console.log('✅ Contact submission saved and verified!\n');

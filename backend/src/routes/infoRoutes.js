@@ -10,7 +10,7 @@ router.get('/info', (req, res) => {
     success: true,
     organization: appConfig.contact.organizationName,
     contact: {
-      email: appConfig.contact.email, // agrihealth@gmail.com
+      email: appConfig.contact.email, // agrihealth37@gmail.com
       phone: appConfig.contact.phone, // +91 8252663421
       whatsapp: appConfig.contact.whatsappNumber,
       address: appConfig.contact.address,

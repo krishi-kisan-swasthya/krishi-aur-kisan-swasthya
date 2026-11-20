@@ -40,7 +40,7 @@ export default function Footer({ t }) {
             >
               <i className="fa-brands fa-whatsapp"></i>
             </a>
-            <a href="mailto:agrihealth@gmail.com" title="Email">
+            <a href="mailto:agrihealth37@gmail.com" title="Email">
               <Mail size={16} />
             </a>
           </div>
@@ -85,7 +85,7 @@ export default function Footer({ t }) {
           </p>
           <p>
             <Mail size={18} />
-            <a href="mailto:agrihealth@gmail.com">agrihealth@gmail.com</a>
+            <a href="mailto:agrihealth37@gmail.com">agrihealth37@gmail.com</a>
           </p>
           <p>
             <Clock size={18} />

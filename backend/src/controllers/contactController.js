@@ -27,7 +27,7 @@ export const contactController = {
         message: (message || '').trim()
       });
 
-      // 1. Send Email Notification to Admin (agrihealth@gmail.com)
+      // 1. Send Email Notification to Admin (agrihealth37@gmail.com)
       emailService.sendContactNotificationToAdmin(contactRecord).catch(err => {
         console.error('[ContactController] Error sending admin email:', err);
       });
