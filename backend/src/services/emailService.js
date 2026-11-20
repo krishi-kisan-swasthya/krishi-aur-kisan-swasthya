@@ -5,21 +5,31 @@ let transporter = null;
 
 // Initialize transporter
 const initTransporter = () => {
-  if (appConfig.smtp.host && appConfig.smtp.user) {
-    transporter = nodemailer.createTransport({
-      host: appConfig.smtp.host,
-      port: appConfig.smtp.port,
-      secure: appConfig.smtp.secure,
-      auth: {
-        user: appConfig.smtp.user,
-        pass: appConfig.smtp.pass
-      }
-    });
-    console.log('[EmailService] SMTP transporter configured for host:', appConfig.smtp.host);
+  if (appConfig.smtp.user && appConfig.smtp.pass) {
+    const transportConfig = appConfig.smtp.host && appConfig.smtp.host !== 'smtp.gmail.com'
+      ? {
+          host: appConfig.smtp.host,
+          port: appConfig.smtp.port,
+          secure: appConfig.smtp.secure,
+          auth: {
+            user: appConfig.smtp.user,
+            pass: appConfig.smtp.pass
+          }
+        }
+      : {
+          service: 'gmail',
+          auth: {
+            user: appConfig.smtp.user,
+            pass: appConfig.smtp.pass
+          }
+        };
+
+    transporter = nodemailer.createTransport(transportConfig);
+    console.log('[EmailService] Live email dispatch active for:', appConfig.smtp.user);
   } else {
     // Development / Simulation Mode
     transporter = null;
-    console.log('[EmailService] Running in simulated mode. Emails will be logged to console and notifications log.');
+    console.log('[EmailService] Running in simulated mode. Add SMTP_PASS in Render Environment to receive real emails.');
   }
 };
 
