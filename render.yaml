@@ -1,0 +1,22 @@
+services:
+  - type: web
+    name: krishiaurkishan-backend
+    env: node
+    plan: free
+    rootDir: backend
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      - key: CORS_ORIGIN
+        value: "*"
+      - key: ADMIN_EMAIL
+        value: agrihealth@gmail.com
+      - key: CONTACT_PHONE
+        value: "+91 8252663421"
+      - key: WHATSAPP_NUMBER
+        value: "+91 8252663421"
