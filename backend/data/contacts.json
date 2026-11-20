@@ -1,5 +1,17 @@
 [
   {
+    "id": "inq-1795187226140-9185",
+    "createdAt": "2026-11-20T15:07:06.140Z",
+    "status": "new",
+    "firstName": "Sonu",
+    "lastName": "Mandal",
+    "email": "sonu.bcastudent@gmail.com",
+    "phone": "8252663421",
+    "address": "Karolan ka barh, Near RAAZ HOSTEL, jaipur Raaz hostel",
+    "interest": "General Query",
+    "message": ""
+  },
+  {
     "id": "inq-1795184654421-8993",
     "createdAt": "2026-11-20T14:24:14.421Z",
     "status": "new",
