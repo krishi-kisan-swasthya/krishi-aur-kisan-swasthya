@@ -44,6 +44,18 @@ router.post('/newsletter/subscribe', (req, res) => {
   });
 });
 
+// GET /api/email-status - Status of email delivery service
+router.get('/email-status', (req, res) => {
+  res.json({
+    emailMode: appConfig.smtp.pass ? 'LIVE_GMAIL_SMTP' : 'SIMULATION_MODE',
+    smtpUserConfigured: !!appConfig.smtp.user,
+    smtpUser: appConfig.smtp.user,
+    smtpPassConfigured: !!appConfig.smtp.pass,
+    adminRecipient: appConfig.contact.email,
+    instructions: appConfig.smtp.pass ? 'Ready to send live emails via Gmail' : 'Add SMTP_PASS and SMTP_USER in Render Environment tab'
+  });
+});
+
 // GET /api/health - Health check
 router.get('/health', (req, res) => {
   res.json({
