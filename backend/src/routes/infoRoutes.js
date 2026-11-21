@@ -1,6 +1,7 @@
 import express from 'express';
 import { appConfig } from '../config/appConfig.js';
 import { db } from '../config/database.js';
+import { emailService } from '../services/emailService.js';
 
 const router = express.Router();
 
@@ -10,8 +11,8 @@ router.get('/info', (req, res) => {
     success: true,
     organization: appConfig.contact.organizationName,
     contact: {
-      email: appConfig.contact.email, // agrihealth37@gmail.com
-      phone: appConfig.contact.phone, // +91 8252663421
+      email: appConfig.contact.email,
+      phone: appConfig.contact.phone,
       whatsapp: appConfig.contact.whatsappNumber,
       address: appConfig.contact.address,
       operatingHours: appConfig.contact.operatingHours,
@@ -52,8 +53,40 @@ router.get('/email-status', (req, res) => {
     smtpUser: appConfig.smtp.user,
     smtpPassConfigured: !!appConfig.smtp.pass,
     adminRecipient: appConfig.contact.email,
+    secondaryRecipient: appConfig.contact.secondaryNotifyEmail,
     instructions: appConfig.smtp.pass ? 'Ready to send live emails via Gmail' : 'Add SMTP_PASS and SMTP_USER in Render Environment tab'
   });
+});
+
+// GET /api/send-test-email - Test live email dispatch directly with full error details
+router.get('/send-test-email', async (req, res) => {
+  const targetEmail = req.query.to || appConfig.contact.email;
+  try {
+    const result = await emailService.sendMail({
+      to: targetEmail,
+      subject: '🌱 Krishi Aur Kishan - Live Email Diagnostic Test',
+      html: `
+        <div style="font-family: Arial, sans-serif; padding: 20px; border: 1px solid #4CAF50; border-radius: 8px;">
+          <h2 style="color: #2E7D32;">🌱 ईमेल सेवा सफलतापूर्वक काम कर रही है!</h2>
+          <p>यह टेस्ट ईमेल कृषि और किसान स्वास्थ्य पोर्टल द्वारा भेजा गया है।</p>
+          <p><strong>प्राप्तकर्ता:</strong> ${targetEmail}</p>
+          <p><strong>सर्वर समय:</strong> ${new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })}</p>
+        </div>
+      `
+    });
+
+    return res.json({
+      success: result.success,
+      targetEmail,
+      smtpSender: appConfig.smtp.user,
+      result
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      error: error.message
+    });
+  }
 });
 
 // GET /api/health - Health check

@@ -1,5 +1,13 @@
 import dotenv from 'dotenv';
-dotenv.config();
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+// Ensure backend/.env is loaded regardless of process launch location
+dotenv.config({ path: path.resolve(__dirname, '../../.env') });
+dotenv.config(); // fallback to current dir if any
 
 export const appConfig = {
   port: process.env.PORT || 5000,
@@ -9,6 +17,7 @@ export const appConfig = {
   // Official Contact Info
   contact: {
     email: process.env.ADMIN_EMAIL || 'agrihealth37@gmail.com',
+    secondaryNotifyEmail: process.env.SECONDARY_ADMIN_EMAIL || 'sonu.bcastudent@gmail.com',
     phone: process.env.CONTACT_PHONE || '+91 8252663421',
     cleanPhone: '8252663421',
     whatsappNumber: process.env.WHATSAPP_NUMBER || '+91 8252663421',
@@ -22,11 +31,11 @@ export const appConfig = {
 
   // Email / SMTP Settings
   smtp: {
-    host: process.env.SMTP_HOST || '',
+    host: process.env.SMTP_HOST || 'smtp.gmail.com',
     port: parseInt(process.env.SMTP_PORT || '587', 10),
     secure: process.env.SMTP_SECURE === 'true',
-    user: process.env.SMTP_USER || '',
-    pass: process.env.SMTP_PASS || '',
+    user: process.env.SMTP_USER || 'agrihealth37@gmail.com',
+    pass: process.env.SMTP_PASS || 'djseumwhadxcrlmm',
     fromEmail: process.env.SMTP_FROM || 'agrihealth37@gmail.com'
   }
 };

@@ -3,41 +3,46 @@ import { appConfig } from '../config/appConfig.js';
 
 let transporter = null;
 
-// Initialize transporter
+// Initialize transporter with universal TLS port 587
 const initTransporter = () => {
   if (appConfig.smtp.user && appConfig.smtp.pass) {
-    const transportConfig = appConfig.smtp.host && appConfig.smtp.host !== 'smtp.gmail.com'
-      ? {
-          host: appConfig.smtp.host,
-          port: appConfig.smtp.port,
-          secure: appConfig.smtp.secure,
-          auth: {
-            user: appConfig.smtp.user,
-            pass: appConfig.smtp.pass
-          }
-        }
-      : {
-          service: 'gmail',
-          auth: {
-            user: appConfig.smtp.user,
-            pass: appConfig.smtp.pass
-          }
-        };
+    const transportConfig = {
+      host: appConfig.smtp.host || 'smtp.gmail.com',
+      port: appConfig.smtp.port || 587,
+      secure: appConfig.smtp.secure || false,
+      auth: {
+        user: appConfig.smtp.user,
+        pass: appConfig.smtp.pass
+      },
+      tls: {
+        rejectUnauthorized: false
+      }
+    };
 
     transporter = nodemailer.createTransport(transportConfig);
-    console.log('[EmailService] Live email dispatch active for:', appConfig.smtp.user);
+    console.log('[EmailService] SMTP transporter active on port 587 for:', appConfig.smtp.user);
   } else {
     // Development / Simulation Mode
     transporter = null;
-    console.log('[EmailService] Running in simulated mode. Add SMTP_PASS in Render Environment to receive real emails.');
+    console.log('[EmailService] Running in simulated mode. Add SMTP_PASS to receive real emails.');
   }
 };
 
 initTransporter();
 
+// Helper to get all admin recipient emails
+const getAdminRecipients = () => {
+  const emails = [appConfig.contact.email];
+  if (appConfig.contact.secondaryNotifyEmail && appConfig.contact.secondaryNotifyEmail !== appConfig.contact.email) {
+    emails.push(appConfig.contact.secondaryNotifyEmail);
+  }
+  return emails.join(', ');
+};
+
 export const emailService = {
-  // Send notification to admin (agrihealth37@gmail.com) on new contact message
+  // Send notification to admin(s) on new contact message
   sendContactNotificationToAdmin: async (contactData) => {
+    const recipients = getAdminRecipients();
     const subject = `[नया संदेश] नया संपर्क अनुरोध: ${contactData.firstName} ${contactData.lastName || ''} (${contactData.interest})`;
     const html = `
       <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; border: 1px solid #e0e0e0; border-radius: 8px; overflow: hidden;">
@@ -78,7 +83,7 @@ export const emailService = {
             </tr>
           </table>
           <div style="margin-top: 24px; padding: 12px; background: #e8f5e9; border-radius: 6px; font-size: 13px; color: #1b5e20;">
-            <strong>त्वरित कार्रवाई:</strong> कृपया किसान भाई से हेल्पलाइन <strong>${appConfig.contact.phone}</strong> अथवा ईमेल <strong>${appConfig.contact.email}</strong> के माध्यम से संपर्क करें।
+            <strong>त्वरित कार्रवाई:</strong> कृपया किसान भाई से हेल्पलाइन <strong>${appConfig.contact.phone}</strong> अथवा ईमेल <strong>${contactData.email}</strong> पर संपर्क करें।
           </div>
         </div>
         <div style="background-color: #f1f1f1; padding: 12px; text-align: center; font-size: 12px; color: #777;">
@@ -88,7 +93,7 @@ export const emailService = {
     `;
 
     return emailService.sendMail({
-      to: appConfig.contact.email, // agrihealth37@gmail.com
+      to: recipients,
       subject,
       html,
       replyTo: contactData.email
@@ -135,16 +140,17 @@ export const emailService = {
     });
   },
 
-  // Send booking confirmation to admin (agrihealth37@gmail.com)
+  // Send booking confirmation to admin(s)
   sendBookingNotificationToAdmin: async (bookingData) => {
+    const recipients = getAdminRecipients();
     const subject = `[नई बुकिंग] टोकन ${bookingData.token} - ${bookingData.serviceName} (${bookingData.name})`;
     const html = `
-      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; border: 1px solid #e0e0e0; border-radius: 8px;">
+      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; border: 1px solid #e0e0e0; border-radius: 8px; overflow: hidden;">
         <div style="background-color: #0b6623; color: white; padding: 18px; text-align: center;">
           <h2 style="margin: 0;">परामर्श स्लॉट बुकिंग अलर्ट</h2>
           <p style="margin: 4px 0 0;">टोकन संख्या: <strong>${bookingData.token}</strong></p>
         </div>
-        <div style="padding: 20px;">
+        <div style="padding: 20px; background-color: #ffffff;">
           <table style="width: 100%; border-collapse: collapse; font-size: 14px;">
             <tr><td style="padding: 6px; font-weight: bold;">सेवा (Service):</td><td style="padding: 6px;">${bookingData.serviceName}</td></tr>
             <tr style="background:#f9f9f9;"><td style="padding: 6px; font-weight: bold;">किसान का नाम:</td><td style="padding: 6px;">${bookingData.name}</td></tr>
@@ -161,7 +167,7 @@ export const emailService = {
     `;
 
     return emailService.sendMail({
-      to: appConfig.contact.email, // agrihealth37@gmail.com
+      to: recipients,
       subject,
       html
     });
@@ -170,7 +176,7 @@ export const emailService = {
   // Base send mail function
   sendMail: async ({ to, subject, html, replyTo }) => {
     const mailOptions = {
-      from: `"${appConfig.contact.organizationName}" <${appConfig.smtp.fromEmail || appConfig.contact.email}>`,
+      from: `"कृषि और किसान स्वास्थ्य" <${appConfig.smtp.user}>`,
       to,
       subject,
       html,
@@ -192,7 +198,6 @@ export const emailService = {
       console.log(`TO: ${to}`);
       console.log(`SUBJECT: ${subject}`);
       console.log(`FROM: ${mailOptions.from}`);
-      console.log(`CONTACT HELPLINE: ${appConfig.contact.phone} | EMAIL: ${appConfig.contact.email}`);
       console.log(`======================================================\n`);
       return { success: true, simulated: true, to, subject, mode: 'simulated' };
     }
